@@ -26,10 +26,41 @@
         border-radius: 8px;
         background: #bfe7f5;
       }
+
+      #scene-original,
+      #scene-annotated-figure {
+        margin: 0 0 1.5rem;
+      }
+
+      #scene-original figcaption,
+      #scene-annotated-figure figcaption {
+        padding: 0.5rem;
+        text-align: center;
+        font-weight: 600;
+      }
+
+      #scene-annotated #annotations {
+        font-size: 12px;
+        fill: #333;
+      }
+
+      #scene-annotated #annotations .label {
+        fill: #333;
+        stroke: none;
+        pointer-events: none;
+      }
+
+      #scene-annotated #annotations .callout {
+        fill: none;
+        stroke: #777;
+        stroke-width: 1;
+        pointer-events: none;
+      }
     </style>
   </head>
   <body>
     <main>
+      <figure id="scene-original">
       <svg viewBox="0 0 800 500" role="img" aria-labelledby="scene-title scene-desc" xmlns="http://www.w3.org/2000/svg">
         <title id="scene-title">A house and garden</title>
         <desc id="scene-desc">A sunny country scene with a cloud, leafy tree, red-roofed house, white fence, and curved garden path.</desc>
@@ -77,6 +108,85 @@
 
         <text x="400" y="474" text-anchor="middle" fill="#405b3d" font-size="21" font-weight="600">Welcome to our garden!</text>
       </svg>
+        <figcaption>Original scene</figcaption>
+      </figure>
+
+      <figure id="scene-annotated-figure">
+      <svg id="scene-annotated" viewBox="0 0 800 500" role="img" aria-labelledby="annotated-title annotated-desc" xmlns="http://www.w3.org/2000/svg">
+        <title id="annotated-title">An annotated house and garden</title>
+        <desc id="annotated-desc">The same sunny country scene with labels identifying examples of its SVG shapes.</desc>
+
+        <!-- Sky and lawn -->
+        <rect x="0" y="0" width="800" height="340" fill="#bfe7f5"/>
+        <rect x="0" y="340" width="800" height="160" fill="#83bd68"/>
+
+        <!-- Sun and cloud -->
+        <circle cx="690" cy="82" r="42" fill="#ffd45c"/>
+        <ellipse cx="145" cy="105" rx="54" ry="25" fill="#fff"/>
+        <circle cx="119" cy="96" r="23" fill="#fff"/>
+        <circle cx="151" cy="86" r="30" fill="#fff"/>
+        <circle cx="178" cy="100" r="21" fill="#fff"/>
+
+        <!-- Tree -->
+        <rect x="95" y="260" width="30" height="105" rx="4" fill="#805333"/>
+        <circle cx="110" cy="235" r="53" fill="#4d914e"/>
+        <circle cx="78" cy="250" r="34" fill="#5ca85b"/>
+        <circle cx="143" cy="253" r="35" fill="#5ca85b"/>
+
+        <!-- House -->
+        <rect x="285" y="232" width="260" height="170" fill="#f3d09a" stroke="#75543a" stroke-width="4"/>
+        <polygon points="265,238 415,125 565,238" fill="#b64d42" stroke="#753b35" stroke-width="4" stroke-linejoin="round"/>
+        <rect x="465" y="151" width="37" height="67" fill="#a94b3e" stroke="#753b35" stroke-width="4"/>
+        <rect x="388" y="310" width="57" height="92" fill="#805333" stroke="#583b28" stroke-width="3"/>
+        <circle cx="432" cy="358" r="4" fill="#f7d96b"/>
+        <rect x="315" y="265" width="55" height="50" fill="#bde7f5" stroke="#75543a" stroke-width="4"/>
+        <line x1="342.5" y1="265" x2="342.5" y2="315" stroke="#75543a" stroke-width="3"/>
+        <line x1="315" y1="290" x2="370" y2="290" stroke="#75543a" stroke-width="3"/>
+        <rect x="465" y="265" width="55" height="50" fill="#bde7f5" stroke="#75543a" stroke-width="4"/>
+        <line x1="492.5" y1="265" x2="492.5" y2="315" stroke="#75543a" stroke-width="3"/>
+        <line x1="465" y1="290" x2="520" y2="290" stroke="#75543a" stroke-width="3"/>
+
+        <!-- Curved garden path -->
+        <path d="M 400 402 C 390 433, 350 453, 342 500 L 478 500 C 470 453, 440 433, 445 402 Z" fill="#e8d4a9"/>
+
+        <!-- Fence -->
+        <polyline points="0,374 45,374 45,334 57,334 57,374 102,374 102,334 114,334 114,374 159,374 159,334 171,334 171,374 216,374 216,334 228,334 228,374 285,374"
+          fill="none" stroke="#f7f0dc" stroke-width="8" stroke-linejoin="round"/>
+        <line x1="0" y1="350" x2="285" y2="350" stroke="#f7f0dc" stroke-width="7"/>
+        <polyline points="545,374 590,374 590,334 602,334 602,374 647,374 647,334 659,334 659,374 704,374 704,334 716,334 716,374 761,374 761,334 773,334 773,374 800,374"
+          fill="none" stroke="#f7f0dc" stroke-width="8" stroke-linejoin="round"/>
+        <line x1="545" y1="350" x2="800" y2="350" stroke="#f7f0dc" stroke-width="7"/>
+
+        <text x="400" y="474" text-anchor="middle" fill="#405b3d" font-size="21" font-weight="600">Welcome to our garden!</text>
+
+        <g id="annotations">
+          <line class="callout" x1="626" y1="42" x2="660" y2="65"/>
+          <text class="label" x="500" y="38">circle: cx=690, cy=82, r=42</text>
+
+          <line class="callout" x1="83" y1="292" x2="96" y2="292"/>
+          <text class="label" x="8" y="287">rect: x=95, y=260, width=30, height=105</text>
+
+          <line class="callout" x1="128" y1="142" x2="140" y2="124"/>
+          <text class="label" x="10" y="153">ellipse: cx=145, cy=105, rx=54, ry=25</text>
+
+          <line class="callout" x1="340" y1="327" x2="342.5" y2="313"/>
+          <text class="label" x="270" y="340">line: (342.5,265) → (342.5,315)</text>
+
+          <line class="callout" x1="45" y1="410" x2="45" y2="380"/>
+          <text class="label" x="8" y="426">polyline: 0,374 45,374 45,334</text>
+
+          <line class="callout" x1="572" y1="170" x2="550" y2="227"/>
+          <text class="label" x="575" y="165">polygon: 265,238 415,125 565,238</text>
+
+          <line class="callout" x1="568" y1="430" x2="478" y2="470"/>
+          <text class="label" x="570" y="428">path: M400,402 C390,433 L478,500</text>
+
+          <line class="callout" x1="535" y1="480" x2="505" y2="474"/>
+          <text class="label" x="540" y="487">text: x=400, y=474</text>
+        </g>
+      </svg>
+        <figcaption>Annotated scene (Step 2)</figcaption>
+      </figure>
     </main>
   </body>
 </html>
